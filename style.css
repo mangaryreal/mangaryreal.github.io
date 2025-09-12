@@ -746,20 +746,65 @@ select.form-control {
     padding: var(--space-24);
 }
 
+/* Header */
 header {
-    text-align: center;
     margin-bottom: var(--space-32);
 }
 
-header h1 {
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-16);
+}
+
+.header-text {
+    text-align: left;
+}
+
+.header-text h1 {
     color: var(--color-text);
     margin-bottom: var(--space-8);
 }
 
-header p {
+.header-text p {
     color: var(--color-text-secondary);
     font-size: var(--font-size-lg);
     margin: 0;
+}
+
+/* Settings Button */
+.settings-btn {
+    background: var(--color-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    padding: var(--space-12);
+    cursor: pointer;
+    color: var(--color-text);
+    transition: all var(--duration-normal) var(--ease-standard);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.settings-btn:hover {
+    background: var(--color-secondary-hover);
+    transform: rotate(90deg);
+}
+
+.settings-btn:focus {
+    outline: var(--focus-outline);
+    box-shadow: var(--focus-ring);
+}
+
+.settings-btn:active {
+    background: var(--color-secondary-active);
+    transform: rotate(90deg) scale(0.95);
 }
 
 /* Status Section */
@@ -810,7 +855,7 @@ header p {
     height: 100%;
     background: linear-gradient(90deg, var(--color-primary), var(--color-teal-300));
     border-radius: var(--radius-full);
-    transition: width 0.3s var(--ease-standard);
+    transition: width 0.5s var(--ease-standard);
     width: 0%;
 }
 
@@ -819,6 +864,7 @@ header p {
     justify-content: space-between;
     align-items: center;
     gap: var(--space-16);
+    margin-bottom: var(--space-16);
 }
 
 .progress-percentage {
@@ -834,6 +880,23 @@ header p {
     font-family: var(--font-family-mono);
 }
 
+/* Earnings Display */
+.earnings-display {
+    margin-bottom: var(--space-16);
+}
+
+.earnings-text {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-success);
+    background: var(--color-bg-3);
+    padding: var(--space-12) var(--space-20);
+    border-radius: var(--radius-lg);
+    display: inline-block;
+    border: 1px solid rgba(var(--color-success-rgb), 0.2);
+}
+
+/* Status Messages */
 .status-message {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
@@ -857,20 +920,135 @@ header p {
     color: var(--color-error);
 }
 
-/* Schedule Section */
-.schedule-section {
-    margin-top: var(--space-32);
+/* Modal Styles */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-16);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) var(--ease-standard),
+                visibility var(--duration-normal) var(--ease-standard);
 }
 
+.modal-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.settings-modal {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: hidden;
+    transform: translateY(20px) scale(0.95);
+    transition: transform var(--duration-normal) var(--ease-standard);
+    position: relative;
+    z-index: 10000;
+}
+
+.modal-backdrop.show .settings-modal {
+    transform: translateY(0) scale(1);
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-24);
+    border-bottom: 1px solid var(--color-card-border-inner);
+    background: var(--color-surface);
+    position: sticky;
+    top: 0;
+    z-index: 10001;
+}
+
+.settings-header h2 {
+    margin: 0;
+    color: var(--color-text);
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    padding: var(--space-8);
+    border-radius: var(--radius-sm);
+    transition: all var(--duration-fast) var(--ease-standard);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.close-btn:hover {
+    background: var(--color-secondary);
+    color: var(--color-text);
+}
+
+.close-btn:focus {
+    outline: var(--focus-outline);
+    box-shadow: var(--focus-ring);
+}
+
+.close-btn:active {
+    background: var(--color-secondary-active);
+    transform: scale(0.95);
+}
+
+.settings-content {
+    padding: var(--space-24);
+    max-height: calc(90vh - 120px);
+    overflow-y: auto;
+}
+
+/* Settings Sections */
+.settings-section {
+    margin-bottom: var(--space-32);
+}
+
+.settings-section:last-of-type {
+    margin-bottom: var(--space-24);
+}
+
+.settings-section h3 {
+    color: var(--color-text);
+    margin-bottom: var(--space-8);
+    font-size: var(--font-size-xl);
+}
+
+.section-description {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-20);
+    font-size: var(--font-size-base);
+}
+
+/* Schedule Grid */
 .schedule-grid {
     display: grid;
-    gap: var(--space-20);
-    margin-bottom: var(--space-24);
+    gap: var(--space-16);
+    margin-bottom: var(--space-20);
 }
 
 @media (min-width: 768px) {
     .schedule-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-20);
     }
 }
 
@@ -892,7 +1070,92 @@ header p {
     min-width: 100px;
 }
 
-/* Form styles */
+/* Wage Calculator */
+.wage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-16);
+    flex-wrap: wrap;
+    gap: var(--space-12);
+}
+
+/* Toggle Switch */
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    user-select: none;
+}
+
+.toggle-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.toggle-slider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background: var(--color-secondary);
+    border-radius: var(--radius-full);
+    transition: background var(--duration-normal) var(--ease-standard);
+    cursor: pointer;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: var(--color-surface);
+    border-radius: 50%;
+    transition: transform var(--duration-normal) var(--ease-standard);
+    box-shadow: var(--shadow-xs);
+}
+
+.toggle-input:checked + .toggle-slider {
+    background: var(--color-primary);
+}
+
+.toggle-input:checked + .toggle-slider::before {
+    transform: translateX(24px);
+}
+
+.toggle-input:focus + .toggle-slider {
+    box-shadow: var(--focus-ring);
+}
+
+.toggle-label:hover .toggle-slider {
+    background: var(--color-secondary-hover);
+}
+
+.toggle-input:checked + .toggle-slider:hover {
+    background: var(--color-primary-hover);
+}
+
+.wage-inputs {
+    display: grid;
+    gap: var(--space-16);
+    margin-top: var(--space-16);
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+@media (min-width: 768px) {
+    .wage-inputs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Form Elements */
 .form-group {
     margin-bottom: var(--space-16);
 }
@@ -904,7 +1167,28 @@ header p {
     font-size: var(--font-size-base);
 }
 
-/* Success message */
+/* Settings Actions */
+.settings-actions {
+    margin-top: var(--space-24);
+    padding-top: var(--space-24);
+    border-top: 1px solid var(--color-card-border-inner);
+}
+
+/* Messages */
+.validation-message {
+    margin-top: var(--space-16);
+    padding: var(--space-12) var(--space-16);
+    border-radius: var(--radius-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+}
+
+.validation-message.error {
+    background: var(--color-bg-4);
+    color: var(--color-error);
+    border: 1px solid rgba(var(--color-error-rgb), 0.2);
+}
+
 .success-message {
     margin-top: var(--space-16);
     text-align: center;
@@ -915,10 +1199,18 @@ header p {
     justify-content: center;
 }
 
-/* Mobile responsiveness */
+/* Mobile Responsiveness */
 @media (max-width: 767px) {
     .container {
         padding: var(--space-16);
+    }
+    
+    .header-content {
+        align-items: center;
+    }
+    
+    .header-text {
+        text-align: center;
     }
     
     .progress-stats {
@@ -943,18 +1235,64 @@ header p {
         flex: none;
         width: 80px;
     }
+    
+    .settings-content {
+        padding: var(--space-16);
+    }
+    
+    .settings-header {
+        padding: var(--space-16);
+    }
+    
+    .wage-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .modal-backdrop {
+        padding: var(--space-8);
+    }
+    
+    .settings-modal {
+        margin: var(--space-8);
+        max-height: calc(100vh - 32px);
+    }
 }
 
-/* Animation for progress updates */
+/* Smooth Animations */
 .progress-fill {
     transition: width 0.5s var(--ease-standard);
 }
 
-/* Card hover effects for better interactivity */
 .card {
     transition: transform 0.2s var(--ease-standard), box-shadow 0.2s var(--ease-standard);
 }
 
 .card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .settings-btn:hover {
+        transform: none;
+    }
+    
+    .progress-fill {
+        transition: none;
+    }
+    
+    .modal-backdrop,
+    .settings-modal {
+        transition: none;
+    }
+    
+    .toggle-slider::before {
+        transition: none;
+    }
+}
+
+/* Ensure body doesn't scroll when modal is open */
+body.modal-open {
+    overflow: hidden;
 }
