@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Time Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Weekly Time Tracker</h1>
+            <p>Track your daily time periods and see real-time progress</p>
+        </header>
+
+        <main>
+            <!-- Current Status Section -->
+            <section class="status-section">
+                <div class="card">
+                    <div class="card__body">
+                        <h2 id="current-day">Today</h2>
+                        <div class="current-period" id="current-period">
+                            <span id="period-display">No schedule set</span>
+                        </div>
+                        
+                        <div class="progress-container" id="progress-container" style="display: none;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <div class="progress-stats">
+                                <div class="progress-percentage" id="progress-percentage">0%</div>
+                                <div class="progress-remaining" id="progress-remaining">--:--:--</div>
+                            </div>
+                        </div>
+
+                        <div class="status-message" id="status-message"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule Input Section -->
+            <section class="schedule-section">
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Weekly Schedule</h3>
+                        <p>Set your time periods for each day of the week</p>
+                    </div>
+                    <div class="card__body">
+                        <form id="schedule-form">
+                            <div class="schedule-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Monday</label>
+                                    <div class="time-inputs">
+                                        <input type="time" id="monday-start" class="form-control" value="08:45">
+                                        <span>to</span>
+                                        <input type="time" id="monday-end" class="form-control" value="17:30">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Tuesday</label>
+                                    <div class="time-inputs">
+                                        <input type="time" id="tuesday-start" class="form-control" value="08:45">
+                                        <span>to</span>
+                                        <input type="time" id="tuesday-end" class="form-control" value="17:30">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Wednesday</label>
+                                    <div class="time-inputs">
+                                        <input type="time" id="wednesday-start" class="form-control" value="08:45">
+                                        <span>to</span>
+                                        <input type="time" id="wednesday-end" class="form-control" value="17:30">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Thursday</label>
+                                    <div class="time-inputs">
+                                        <input type="time" id="thursday-start" class="form-control" value="08:45">
+                                        <span>to</span>
+                                        <input type="time" id="thursday-end" class="form-control" value="17:30">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Friday</label>
+                                    <div class="time-inputs">
+                                        <input type="time" id="friday-start" class="form-control" value="08:45">
+                                        <span>to</span>
+                                        <input type="time" id="friday-end" class="form-control" value="17:45">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Saturday</label>
+                                    <div class="time-inputs">
+                                        <input type="time" id="saturday-start" class="form-control" value="09:00">
+                                        <span>to</span>
+                                        <input type="time" id="saturday-end" class="form-control" value="18:00">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Sunday</label>
+                                    <div class="time-inputs">
+                                        <input type="time" id="sunday-start" class="form-control" value="09:00">
+                                        <span>to</span>
+                                        <input type="time" id="sunday-end" class="form-control" value="18:00">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary btn--full-width">Save Schedule</button>
+                        </form>
+
+                        <div class="success-message" id="success-message" style="display: none;">
+                            <div class="status status--success">Schedule saved successfully!</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
