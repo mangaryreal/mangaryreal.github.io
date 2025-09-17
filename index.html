@@ -3,185 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekly Time Tracker</title>
+    <title>⏰ Multilingual Time Tracker</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#21808d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <div class="header-text">
-                    <h1>Weekly Time Tracker</h1>
-                    <p>Track your daily time periods and see real-time progress</p>
+    <!-- Setup Modal (Initial State) -->
+    <div class="modal" id="setup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="setup-title">Welcome! Let's Set Up Your Time Tracker</h2>
+            </div>
+            <div class="setup-wizard" id="setup-wizard">
+                <!-- Step 1: Language -->
+                <div class="setup-step setup-step--active" id="setup-step-1">
+                    <h3 id="step1-title">Choose Your Language</h3>
+                    <div class="language-grid">
+                        <button class="language-btn" data-lang="en">
+                            <span class="language-flag">🇺🇸</span>
+                            <span class="language-name">English</span>
+                        </button>
+                        <button class="language-btn" data-lang="zh-TW">
+                            <span class="language-flag">🇭🇰</span>
+                            <span class="language-name">繁體中文</span>
+                        </button>
+                        <button class="language-btn" data-lang="de">
+                            <span class="language-flag">🇩🇪</span>
+                            <span class="language-name">Deutsch</span>
+                        </button>
+                        <button class="language-btn" data-lang="ja">
+                            <span class="language-flag">🇯🇵</span>
+                            <span class="language-name">日本語</span>
+                        </button>
+                    </div>
                 </div>
-                <button class="settings-btn" id="settings-btn" aria-label="Open Settings">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"></path>
-                    </svg>
-                </button>
+
+                <!-- Step 2: Salary -->
+                <div class="setup-step" id="setup-step-2">
+                    <h3 id="step2-title">Enter Your Salary Details</h3>
+                    <div class="form-group">
+                        <label class="form-label" id="setup-currency-label">Currency</label>
+                        <select class="form-control" id="setup-currency-select">
+                            <option value="">Select Currency</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="setup-salary-label">Monthly Salary</label>
+                        <input type="number" class="form-control" id="setup-monthly-salary" placeholder="" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="setup-working-days-label">Working Days per Month</label>
+                        <input type="number" class="form-control" id="setup-working-days" placeholder="22" min="1" max="31" value="22">
+                    </div>
+                </div>
+
+                <!-- Step 3: Schedule -->
+                <div class="setup-step" id="setup-step-3">
+                    <h3 id="step3-title">Set Your Weekly Schedule</h3>
+                    <div class="schedule-grid">
+                        <div class="schedule-day">
+                            <label class="form-label" id="setup-monday-label">Monday</label>
+                            <div class="time-inputs">
+                                <input type="time" class="form-control time-input" id="setup-mon-start">
+                                <span id="setup-to-label-1">to</span>
+                                <input type="time" class="form-control time-input" id="setup-mon-end">
+                            </div>
+                        </div>
+                        <div class="schedule-day">
+                            <label class="form-label" id="setup-tuesday-label">Tuesday</label>
+                            <div class="time-inputs">
+                                <input type="time" class="form-control time-input" id="setup-tue-start">
+                                <span id="setup-to-label-2">to</span>
+                                <input type="time" class="form-control time-input" id="setup-tue-end">
+                            </div>
+                        </div>
+                        <div class="schedule-day">
+                            <label class="form-label" id="setup-wednesday-label">Wednesday</label>
+                            <div class="time-inputs">
+                                <input type="time" class="form-control time-input" id="setup-wed-start">
+                                <span id="setup-to-label-3">to</span>
+                                <input type="time" class="form-control time-input" id="setup-wed-end">
+                            </div>
+                        </div>
+                        <div class="schedule-day">
+                            <label class="form-label" id="setup-thursday-label">Thursday</label>
+                            <div class="time-inputs">
+                                <input type="time" class="form-control time-input" id="setup-thu-start">
+                                <span id="setup-to-label-4">to</span>
+                                <input type="time" class="form-control time-input" id="setup-thu-end">
+                            </div>
+                        </div>
+                        <div class="schedule-day">
+                            <label class="form-label" id="setup-friday-label">Friday</label>
+                            <div class="time-inputs">
+                                <input type="time" class="form-control time-input" id="setup-fri-start">
+                                <span id="setup-to-label-5">to</span>
+                                <input type="time" class="form-control time-input" id="setup-fri-end">
+                            </div>
+                        </div>
+                        <div class="schedule-day">
+                            <label class="form-label" id="setup-saturday-label">Saturday</label>
+                            <div class="time-inputs">
+                                <input type="time" class="form-control time-input" id="setup-sat-start">
+                                <span id="setup-to-label-6">to</span>
+                                <input type="time" class="form-control time-input" id="setup-sat-end">
+                            </div>
+                        </div>
+                        <div class="schedule-day">
+                            <label class="form-label" id="setup-sunday-label">Sunday</label>
+                            <div class="time-inputs">
+                                <input type="time" class="form-control time-input" id="setup-sun-start">
+                                <span id="setup-to-label-7">to</span>
+                                <input type="time" class="form-control time-input" id="setup-sun-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setup-navigation">
+                    <button class="btn btn--outline" id="setup-prev" style="display: none;">Previous</button>
+                    <button class="btn btn--primary" id="setup-next">Next</button>
+                    <button class="btn btn--primary" id="setup-finish" style="display: none;">Start Tracking!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Focus Mode -->
+    <div class="focus-mode hidden" id="focus-mode">
+        <div class="focus-content">
+            <div class="focus-time" id="focus-time">--:--</div>
+            <div class="focus-status" id="focus-status">Ready</div>
+            <div class="focus-earnings" id="focus-earnings">$0.00</div>
+            <div class="focus-rate" id="focus-rate">$0.00/sec</div>
+            <button class="focus-exit" id="focus-exit">×</button>
+        </div>
+    </div>
+
+    <!-- Mini Widget Mode -->
+    <div class="mini-widget hidden" id="mini-widget">
+        <div class="mini-widget__header">
+            <span class="mini-widget__icon">⏰</span>
+            <div class="mini-widget__controls">
+                <button class="mini-widget__btn" id="expand-widget" title="Expand">📱</button>
+                <button class="mini-widget__btn" id="close-widget" title="Close">✕</button>
+            </div>
+        </div>
+        <div class="mini-widget__content">
+            <div class="mini-widget__status" id="mini-status">Not Working</div>
+            <div class="mini-widget__progress">
+                <div class="mini-progress-bar">
+                    <div class="mini-progress-fill" id="mini-progress-fill"></div>
+                </div>
+                <span class="mini-progress-text" id="mini-progress-text">0%</span>
+            </div>
+            <div class="mini-widget__earnings" id="mini-earnings">$0.00</div>
+            <div class="mini-widget__rate" id="mini-rate">$0.00/sec</div>
+        </div>
+    </div>
+
+    <!-- Main Application Container -->
+    <div class="container hidden" id="main-app">
+        <header class="app-header">
+            <div class="app-title">
+                <span class="app-icon-inline">⏰</span>
+                <h1 id="app-title">Multilingual Time Tracker</h1>
+            </div>
+            <div class="app-controls">
+                <div class="view-mode-controls">
+                    <button class="view-mode-btn view-mode-btn--active" data-mode="full" title="Full View">🖥️</button>
+                    <button class="view-mode-btn" data-mode="mini" title="Mini Widget">📱</button>
+                    <button class="view-mode-btn" data-mode="focus" title="Focus Mode">🎯</button>
+                </div>
+                <div class="tab-nav">
+                    <button class="tab-btn tab-btn--active" data-tab="tracker" id="tracker-tab-btn">Tracker</button>
+                    <button class="tab-btn" data-tab="calendar" id="calendar-tab-btn">Calendar</button>
+                    <button class="btn btn--outline" id="settings-btn">Settings</button>
+                </div>
             </div>
         </header>
 
-        <main>
-            <!-- Current Status Section -->
-            <section class="status-section">
-                <div class="card">
-                    <div class="card__body">
-                        <h2 id="current-day">Today</h2>
-                        <div class="current-period" id="current-period">
-                            <span id="period-display">No schedule set</span>
-                        </div>
-                        
-                        <div class="progress-container" id="progress-container" style="display: none;">
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progress-fill"></div>
-                            </div>
-                            <div class="progress-stats">
-                                <div class="progress-percentage" id="progress-percentage">0%</div>
-                                <div class="progress-remaining" id="progress-remaining">--:--:--</div>
-                            </div>
-                        </div>
-
-                        <div class="earnings-display" id="earnings-display" style="display: none;">
-                            <span class="earnings-text" id="earnings-text">💰 You've earned $0.00 today!</span>
-                        </div>
-
-                        <div class="status-message" id="status-message"></div>
+        <!-- Tracker Tab -->
+        <main class="tab-content tab-content--active" id="tracker-tab">
+            <div class="tracker-section">
+                <div class="status-card">
+                    <div class="status-header">
+                        <h2 id="current-status">Not Working</h2>
+                        <p class="time-display" id="current-time"></p>
                     </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- Settings Modal -->
-    <div class="modal-backdrop" id="modal-backdrop">
-        <div class="settings-modal" id="settings-modal">
-            <div class="settings-header">
-                <h2>Settings</h2>
-                <button class="close-btn" id="close-btn" aria-label="Close Settings">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="settings-content">
-                <!-- Weekly Schedule Section -->
-                <div class="settings-section">
-                    <h3>Weekly Schedule</h3>
-                    <p class="section-description">Set your work hours for each day (leave blank for days off)</p>
                     
-                    <form id="schedule-form">
-                        <div class="schedule-grid">
-                            <div class="form-group">
-                                <label class="form-label">Monday</label>
-                                <div class="time-inputs">
-                                    <input type="time" id="monday-start" class="form-control">
-                                    <span>to</span>
-                                    <input type="time" id="monday-end" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Tuesday</label>
-                                <div class="time-inputs">
-                                    <input type="time" id="tuesday-start" class="form-control">
-                                    <span>to</span>
-                                    <input type="time" id="tuesday-end" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Wednesday</label>
-                                <div class="time-inputs">
-                                    <input type="time" id="wednesday-start" class="form-control">
-                                    <span>to</span>
-                                    <input type="time" id="wednesday-end" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Thursday</label>
-                                <div class="time-inputs">
-                                    <input type="time" id="thursday-start" class="form-control">
-                                    <span>to</span>
-                                    <input type="time" id="thursday-end" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Friday</label>
-                                <div class="time-inputs">
-                                    <input type="time" id="friday-start" class="form-control">
-                                    <span>to</span>
-                                    <input type="time" id="friday-end" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Saturday</label>
-                                <div class="time-inputs">
-                                    <input type="time" id="saturday-start" class="form-control">
-                                    <span>to</span>
-                                    <input type="time" id="saturday-end" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Sunday</label>
-                                <div class="time-inputs">
-                                    <input type="time" id="sunday-start" class="form-control">
-                                    <span>to</span>
-                                    <input type="time" id="sunday-end" class="form-control">
-                                </div>
-                            </div>
+                    <div class="motivational-message" id="motivational-message">
+                        <div class="message-content">
+                            <h3 id="motivational-title">Ready to start your productive day!</h3>
+                            <p id="motivational-text">Complete setup to begin tracking.</p>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
-                <!-- Wage Calculator Section -->
-                <div class="settings-section">
-                    <div class="wage-header">
-                        <h3>Wage Calculator</h3>
-                        <label class="toggle-label">
-                            <input type="checkbox" id="wage-tracking-toggle" class="toggle-input">
-                            <span class="toggle-slider"></span>
-                            <span class="toggle-text">Enable Wage Tracking</span>
-                        </label>
-                    </div>
-
-                    <div class="wage-inputs" id="wage-inputs" style="display: none;">
-                        <div class="form-group">
-                            <label class="form-label" for="monthly-wage">Monthly Wage</label>
-                            <input type="number" id="monthly-wage" class="form-control" step="0.1">
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
                         </div>
+                        <div class="progress-text" id="progress-text">0%</div>
+                    </div>
+                    
+                    <div class="time-remaining" id="time-remaining">
+                        Complete setup to see progress
+                    </div>
+                </div>
 
+                <div class="earnings-section">
+                    <div class="earnings-grid">
+                        <div class="earning-card">
+                            <h4 id="today-label">Today</h4>
+                            <span class="earning-amount" id="today-earnings">$0.00</span>
+                            <span class="earning-rate" id="today-rate">$0.00/sec</span>
+                        </div>
+                        <div class="earning-card">
+                            <h4 id="week-label">This Week</h4>
+                            <span class="earning-amount" id="week-earnings">$0.00</span>
+                        </div>
+                        <div class="earning-card">
+                            <h4 id="month-label">This Month</h4>
+                            <span class="earning-amount" id="month-earnings">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Calendar Tab -->
+        <main class="tab-content" id="calendar-tab">
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <button class="btn btn--outline" id="prev-month">&lt;</button>
+                    <h2 id="calendar-month">September 2025</h2>
+                    <button class="btn btn--outline" id="next-month">&gt;</button>
+                </div>
+                
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Calendar days will be generated by JavaScript -->
+                </div>
+                
+                <div class="calendar-summary">
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="summary-label" id="days-worked-label">Days Worked</span>
+                            <span class="summary-value" id="days-worked">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label" id="monthly-target-label">Monthly Target</span>
+                            <span class="summary-value" id="monthly-target">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label" id="projected-earnings-label">Projected Earnings</span>
+                            <span class="summary-value" id="projected-earnings">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Settings Modal -->
+        <div class="modal hidden" id="settings-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="settings-title">Settings</h2>
+                    <button class="modal-close" id="close-settings">&times;</button>
+                </div>
+                
+                <form class="settings-form" id="settings-form">
+                    <div class="form-section">
+                        <h3 id="language-section-title">Language & Region</h3>
+                        
                         <div class="form-group">
-                            <label class="form-label" for="working-days">Working Days per Week</label>
-                            <select id="working-days" class="form-control">
-                                <option value="">Select days per week</option>
-                                <option value="1">1 day per week</option>
-                                <option value="2">2 days per week</option>
-                                <option value="3">3 days per week</option>
-                                <option value="4">4 days per week</option>
-                                <option value="5">5 days per week</option>
-                                <option value="6">6 days per week</option>
-                                <option value="7">7 days per week</option>
+                            <label class="form-label" id="language-label">Language</label>
+                            <select class="form-control" id="language-select">
+                                <option value="en">English</option>
+                                <option value="zh-TW">繁體中文 (Traditional Chinese)</option>
+                                <option value="de">Deutsch (German)</option>
+                                <option value="ja">日本語 (Japanese)</option>
                             </select>
                         </div>
                     </div>
-                </div>
 
-                <div class="settings-actions">
-                    <button type="button" class="btn btn--primary btn--full-width" id="save-settings">Save Settings</button>
-                </div>
+                    <div class="form-section">
+                        <h3 id="currency-section-title">Currency & Salary</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label" id="currency-label">Currency</label>
+                            <select class="form-control" id="currency-select">
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="HKD">HKD - Hong Kong Dollar</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="CAD">CAD - Canadian Dollar</option>
+                                <option value="AUD">AUD - Australian Dollar</option>
+                                <option value="JPY">JPY - Japanese Yen</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" id="salary-label">Monthly Salary</label>
+                            <input type="number" class="form-control" id="monthly-salary" placeholder="Enter your monthly salary" min="0" step="0.01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" id="working-days-label">Working Days per Month</label>
+                            <input type="number" class="form-control" id="working-days" placeholder="22" min="1" max="31">
+                        </div>
+                    </div>
 
-                <div class="validation-message" id="validation-message" style="display: none;"></div>
-                <div class="success-message" id="success-message" style="display: none;">
-                    <div class="status status--success">Settings saved successfully!</div>
-                </div>
+                    <div class="form-section">
+                        <h3 id="schedule-section-title">Weekly Schedule</h3>
+                        
+                        <div class="schedule-grid">
+                            <div class="schedule-day">
+                                <label class="form-label" id="monday-label">Monday</label>
+                                <div class="time-inputs">
+                                    <input type="time" class="form-control time-input" id="mon-start">
+                                    <span id="to-label-1">to</span>
+                                    <input type="time" class="form-control time-input" id="mon-end">
+                                </div>
+                            </div>
+                            <div class="schedule-day">
+                                <label class="form-label" id="tuesday-label">Tuesday</label>
+                                <div class="time-inputs">
+                                    <input type="time" class="form-control time-input" id="tue-start">
+                                    <span id="to-label-2">to</span>
+                                    <input type="time" class="form-control time-input" id="tue-end">
+                                </div>
+                            </div>
+                            <div class="schedule-day">
+                                <label class="form-label" id="wednesday-label">Wednesday</label>
+                                <div class="time-inputs">
+                                    <input type="time" class="form-control time-input" id="wed-start">
+                                    <span id="to-label-3">to</span>
+                                    <input type="time" class="form-control time-input" id="wed-end">
+                                </div>
+                            </div>
+                            <div class="schedule-day">
+                                <label class="form-label" id="thursday-label">Thursday</label>
+                                <div class="time-inputs">
+                                    <input type="time" class="form-control time-input" id="thu-start">
+                                    <span id="to-label-4">to</span>
+                                    <input type="time" class="form-control time-input" id="thu-end">
+                                </div>
+                            </div>
+                            <div class="schedule-day">
+                                <label class="form-label" id="friday-label">Friday</label>
+                                <div class="time-inputs">
+                                    <input type="time" class="form-control time-input" id="fri-start">
+                                    <span id="to-label-5">to</span>
+                                    <input type="time" class="form-control time-input" id="fri-end">
+                                </div>
+                            </div>
+                            <div class="schedule-day">
+                                <label class="form-label" id="saturday-label">Saturday</label>
+                                <div class="time-inputs">
+                                    <input type="time" class="form-control time-input" id="sat-start">
+                                    <span id="to-label-6">to</span>
+                                    <input type="time" class="form-control time-input" id="sat-end">
+                                </div>
+                            </div>
+                            <div class="schedule-day">
+                                <label class="form-label" id="sunday-label">Sunday</label>
+                                <div class="time-inputs">
+                                    <input type="time" class="form-control time-input" id="sun-start">
+                                    <span id="to-label-7">to</span>
+                                    <input type="time" class="form-control time-input" id="sun-end">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn--outline" id="cancel-settings">Cancel</button>
+                        <button type="submit" class="btn btn--primary" id="save-settings">Save Settings</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
