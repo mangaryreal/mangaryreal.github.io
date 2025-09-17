@@ -3,144 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⏰ Multilingual Time Tracker</title>
+    <title>⏰ Weekly Time Tracker</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="data:application/json;charset=utf-8;base64,eyJuYW1lIjoiV2Vla2x5IFRpbWUgVHJhY2tlciIsInNob3J0X25hbWUiOiJUaW1lVHJhY2tlciIsImRlc2NyaXB0aW9uIjoiVHJhY2sgeW91ciB3b3JraW5nIGhvdXJzIGFuZCBlYXJuaW5ncyIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjZmNmY2Y5IiwidGhlbWVfY29sb3IiOiIjMjE4MDhkIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtjaGFyc2V0PXV0Zi04O2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTXpJaUlHaGxhV2RvZEQwaU16SWlJSFpwWlhkQ2IzZzlJakFnTUNBek1pQXpNaUlnWm1sc2JEMGlJek14TXpOeE16TWlJSGh0Ykc1ekQya2lhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lQanh5WldOMElIZzlJalo0Tm1JaUlIazlJalo0Tm1JaUlIZHBaSFJvUFNJeE9TSXVOU0lpSUdobGFXZG9kRDBpTVRrdU5pSWdabWxzYkQwaUl6RkdRamhEUkNJZ2NuZzlJakkuTlNJdlBpeDNiM0prY3lCbWFXeHNQU0lqWm1aaUlpQm1iMjUwTFdGemJtbHNlVDBpVFhsdUlHZHVabWZpTHlCSFpXbHpkRjl6WVc1ekxYTmxjbWxtSWl4d2VEMGlNaUlnY0hrOUlqRWlQbEJsYkdGd0lqd3ZkR1Y0ZEQ0OEwzTjJaejQ9IiwidHlwZSI6ImltYWdlL3N2Zyt4bWwiLCJzaXplcyI6IjMySzMyIn0seyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7Y2hhcnNldD11dGYtODtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU1USTRJaUJvWldsbmFIUTlJakV5T0NJZ2RtbGxkMEp2ZUQwaU1DQXdJREV5T0NBeU9EZ2lJR1pwYkd3OUlpTXpNVE16Y1RNeklpQjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNUZV2Y21jdk1qQXdNQzl6ZG1jaVBpeDNiM0prY3lCbWFXeHNQU0lqWm1aaUlpQm1iMjUwTFdGemJtbHNlVDBpVFhsdUlHZHVabWZpTHlCSFpXbHpkRjl6WVc1ekxYTmxjbWxtSWl4d2VEMGlNaUlnY0hrOUlqSWlQbEJsYkdGd0lqd3ZkR1Y0ZEQ0OEwzTjJaejQ9IiwidHlwZSI6ImltYWdlL3N2Zyt4bWwiLCJzaXplcyI6IjEyOHgxMjgifV19">
     <meta name="theme-color" content="#21808d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" href="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0iIzMxM3ExMzMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iNi41MiIgeT0iNi44NiIgd2lkdGg9IjE5LjUiIGhlaWdodD0iMTkuNiIgZmlsbD0iIzFGQjhDRCIgcng9IjIuNSIvPjx3b3JkcyBmaWxsPSIjZmZmIiBmb250LWFzbmxseT0iTXluIGduZmdpLyBHZWlzdF9zYW5zLXNlcmlmIiBweD0iMiIgcHk9IjEiPkJlbGFwPC90ZXh0Pjwvc3ZnPg==">
 </head>
 <body>
-    <!-- Setup Modal (Initial State) -->
-    <div class="modal" id="setup-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="setup-title">Welcome! Let's Set Up Your Time Tracker</h2>
-            </div>
-            <div class="setup-wizard" id="setup-wizard">
-                <!-- Step 1: Language -->
-                <div class="setup-step setup-step--active" id="setup-step-1">
-                    <h3 id="step1-title">Choose Your Language</h3>
-                    <div class="language-grid">
-                        <button class="language-btn" data-lang="en">
-                            <span class="language-flag">🇺🇸</span>
-                            <span class="language-name">English</span>
-                        </button>
-                        <button class="language-btn" data-lang="zh-TW">
-                            <span class="language-flag">🇭🇰</span>
-                            <span class="language-name">繁體中文</span>
-                        </button>
-                        <button class="language-btn" data-lang="de">
-                            <span class="language-flag">🇩🇪</span>
-                            <span class="language-name">Deutsch</span>
-                        </button>
-                        <button class="language-btn" data-lang="ja">
-                            <span class="language-flag">🇯🇵</span>
-                            <span class="language-name">日本語</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Step 2: Salary -->
-                <div class="setup-step" id="setup-step-2">
-                    <h3 id="step2-title">Enter Your Salary Details</h3>
-                    <div class="form-group">
-                        <label class="form-label" id="setup-currency-label">Currency</label>
-                        <select class="form-control" id="setup-currency-select">
-                            <option value="">Select Currency</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" id="setup-salary-label">Monthly Salary</label>
-                        <input type="number" class="form-control" id="setup-monthly-salary" placeholder="" min="0" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" id="setup-working-days-label">Working Days per Month</label>
-                        <input type="number" class="form-control" id="setup-working-days" placeholder="22" min="1" max="31" value="22">
-                    </div>
-                </div>
-
-                <!-- Step 3: Schedule -->
-                <div class="setup-step" id="setup-step-3">
-                    <h3 id="step3-title">Set Your Weekly Schedule</h3>
-                    <div class="schedule-grid">
-                        <div class="schedule-day">
-                            <label class="form-label" id="setup-monday-label">Monday</label>
-                            <div class="time-inputs">
-                                <input type="time" class="form-control time-input" id="setup-mon-start">
-                                <span id="setup-to-label-1">to</span>
-                                <input type="time" class="form-control time-input" id="setup-mon-end">
-                            </div>
-                        </div>
-                        <div class="schedule-day">
-                            <label class="form-label" id="setup-tuesday-label">Tuesday</label>
-                            <div class="time-inputs">
-                                <input type="time" class="form-control time-input" id="setup-tue-start">
-                                <span id="setup-to-label-2">to</span>
-                                <input type="time" class="form-control time-input" id="setup-tue-end">
-                            </div>
-                        </div>
-                        <div class="schedule-day">
-                            <label class="form-label" id="setup-wednesday-label">Wednesday</label>
-                            <div class="time-inputs">
-                                <input type="time" class="form-control time-input" id="setup-wed-start">
-                                <span id="setup-to-label-3">to</span>
-                                <input type="time" class="form-control time-input" id="setup-wed-end">
-                            </div>
-                        </div>
-                        <div class="schedule-day">
-                            <label class="form-label" id="setup-thursday-label">Thursday</label>
-                            <div class="time-inputs">
-                                <input type="time" class="form-control time-input" id="setup-thu-start">
-                                <span id="setup-to-label-4">to</span>
-                                <input type="time" class="form-control time-input" id="setup-thu-end">
-                            </div>
-                        </div>
-                        <div class="schedule-day">
-                            <label class="form-label" id="setup-friday-label">Friday</label>
-                            <div class="time-inputs">
-                                <input type="time" class="form-control time-input" id="setup-fri-start">
-                                <span id="setup-to-label-5">to</span>
-                                <input type="time" class="form-control time-input" id="setup-fri-end">
-                            </div>
-                        </div>
-                        <div class="schedule-day">
-                            <label class="form-label" id="setup-saturday-label">Saturday</label>
-                            <div class="time-inputs">
-                                <input type="time" class="form-control time-input" id="setup-sat-start">
-                                <span id="setup-to-label-6">to</span>
-                                <input type="time" class="form-control time-input" id="setup-sat-end">
-                            </div>
-                        </div>
-                        <div class="schedule-day">
-                            <label class="form-label" id="setup-sunday-label">Sunday</label>
-                            <div class="time-inputs">
-                                <input type="time" class="form-control time-input" id="setup-sun-start">
-                                <span id="setup-to-label-7">to</span>
-                                <input type="time" class="form-control time-input" id="setup-sun-end">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="setup-navigation">
-                    <button class="btn btn--outline" id="setup-prev" style="display: none;">Previous</button>
-                    <button class="btn btn--primary" id="setup-next">Next</button>
-                    <button class="btn btn--primary" id="setup-finish" style="display: none;">Start Tracking!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Focus Mode -->
-    <div class="focus-mode hidden" id="focus-mode">
-        <div class="focus-content">
-            <div class="focus-time" id="focus-time">--:--</div>
-            <div class="focus-status" id="focus-status">Ready</div>
-            <div class="focus-earnings" id="focus-earnings">$0.00</div>
-            <div class="focus-rate" id="focus-rate">$0.00/sec</div>
-            <button class="focus-exit" id="focus-exit">×</button>
-        </div>
-    </div>
+    <!-- App Icon / Logo -->
+    <div class="app-icon hidden" id="app-icon">⏰</div>
 
     <!-- Mini Widget Mode -->
     <div class="mini-widget hidden" id="mini-widget">
@@ -160,26 +33,59 @@
                 <span class="mini-progress-text" id="mini-progress-text">0%</span>
             </div>
             <div class="mini-widget__earnings" id="mini-earnings">$0.00</div>
-            <div class="mini-widget__rate" id="mini-rate">$0.00/sec</div>
+        </div>
+    </div>
+
+    <!-- Quick View Mode -->
+    <div class="quick-view hidden" id="quick-view">
+        <div class="quick-view__header">
+            <h2 id="quick-view-title">Quick View</h2>
+            <button class="btn btn--outline" id="close-quick-view">✕</button>
+        </div>
+        <div class="quick-view__content">
+            <div class="quick-progress">
+                <div class="quick-progress__circle">
+                    <svg class="progress-ring" width="120" height="120">
+                        <circle class="progress-ring__circle" stroke="var(--color-secondary)" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
+                        <circle class="progress-ring__progress" id="quick-progress-circle" stroke="var(--color-primary)" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
+                    </svg>
+                    <div class="quick-progress__text">
+                        <span class="quick-progress__percentage" id="quick-progress-percent">0%</span>
+                        <span class="quick-progress__status" id="quick-status">Ready</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-stats">
+                <div class="quick-stat">
+                    <span class="quick-stat__value" id="quick-time-remaining">--</span>
+                    <span class="quick-stat__label" id="quick-time-label">Time Remaining</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat__value" id="quick-earned">$0.00</span>
+                    <span class="quick-stat__label" id="quick-earned-label">Earned Today</span>
+                </div>
+            </div>
+            <div class="quick-message" id="quick-message">Ready to start your productive day!</div>
         </div>
     </div>
 
     <!-- Main Application Container -->
-    <div class="container hidden" id="main-app">
+    <div class="container" id="main-app">
         <header class="app-header">
             <div class="app-title">
                 <span class="app-icon-inline">⏰</span>
-                <h1 id="app-title">Multilingual Time Tracker</h1>
+                <h1 id="app-title">Weekly Time Tracker</h1>
             </div>
             <div class="app-controls">
                 <div class="view-mode-controls">
                     <button class="view-mode-btn view-mode-btn--active" data-mode="full" title="Full View">🖥️</button>
                     <button class="view-mode-btn" data-mode="mini" title="Mini Widget">📱</button>
-                    <button class="view-mode-btn" data-mode="focus" title="Focus Mode">🎯</button>
+                    <button class="view-mode-btn" data-mode="quick" title="Quick View">⚡</button>
                 </div>
                 <div class="tab-nav">
                     <button class="tab-btn tab-btn--active" data-tab="tracker" id="tracker-tab-btn">Tracker</button>
                     <button class="tab-btn" data-tab="calendar" id="calendar-tab-btn">Calendar</button>
+                    <button class="tab-btn" data-tab="achievements" id="achievements-tab-btn">Achievements</button>
                     <button class="btn btn--outline" id="settings-btn">Settings</button>
                 </div>
             </div>
@@ -197,7 +103,7 @@
                     <div class="motivational-message" id="motivational-message">
                         <div class="message-content">
                             <h3 id="motivational-title">Ready to start your productive day!</h3>
-                            <p id="motivational-text">Complete setup to begin tracking.</p>
+                            <p id="motivational-text">Set your schedule in Settings to begin tracking.</p>
                         </div>
                     </div>
                 </div>
@@ -211,7 +117,7 @@
                     </div>
                     
                     <div class="time-remaining" id="time-remaining">
-                        Complete setup to see progress
+                        Set your schedule to see progress
                     </div>
                 </div>
 
@@ -220,7 +126,6 @@
                         <div class="earning-card">
                             <h4 id="today-label">Today</h4>
                             <span class="earning-amount" id="today-earnings">$0.00</span>
-                            <span class="earning-rate" id="today-rate">$0.00/sec</span>
                         </div>
                         <div class="earning-card">
                             <h4 id="week-label">This Week</h4>
@@ -263,6 +168,28 @@
                             <span class="summary-value" id="projected-earnings">$0.00</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Achievements Tab -->
+        <main class="tab-content" id="achievements-tab">
+            <div class="achievements-section">
+                <div class="achievements-header">
+                    <h2 id="achievements-title">Your Achievements</h2>
+                    <div class="achievements-stats">
+                        <div class="achievement-stat">
+                            <span class="achievement-stat__value" id="total-achievements">0</span>
+                            <span class="achievement-stat__label" id="total-achievements-label">Unlocked</span>
+                        </div>
+                        <div class="achievement-stat">
+                            <span class="achievement-stat__value" id="streak-count">0</span>
+                            <span class="achievement-stat__label" id="streak-label">Day Streak</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievements-grid" id="achievements-grid">
+                    <!-- Achievements will be populated by JavaScript -->
                 </div>
             </div>
         </main>
@@ -313,7 +240,7 @@
                         
                         <div class="form-group">
                             <label class="form-label" id="working-days-label">Working Days per Month</label>
-                            <input type="number" class="form-control" id="working-days" placeholder="22" min="1" max="31">
+                            <input type="number" class="form-control" id="working-days" placeholder="22" min="1" max="31" value="22">
                         </div>
                     </div>
 
@@ -329,6 +256,7 @@
                                     <input type="time" class="form-control time-input" id="mon-end">
                                 </div>
                             </div>
+                            
                             <div class="schedule-day">
                                 <label class="form-label" id="tuesday-label">Tuesday</label>
                                 <div class="time-inputs">
@@ -337,6 +265,7 @@
                                     <input type="time" class="form-control time-input" id="tue-end">
                                 </div>
                             </div>
+                            
                             <div class="schedule-day">
                                 <label class="form-label" id="wednesday-label">Wednesday</label>
                                 <div class="time-inputs">
@@ -345,6 +274,7 @@
                                     <input type="time" class="form-control time-input" id="wed-end">
                                 </div>
                             </div>
+                            
                             <div class="schedule-day">
                                 <label class="form-label" id="thursday-label">Thursday</label>
                                 <div class="time-inputs">
@@ -353,6 +283,7 @@
                                     <input type="time" class="form-control time-input" id="thu-end">
                                 </div>
                             </div>
+                            
                             <div class="schedule-day">
                                 <label class="form-label" id="friday-label">Friday</label>
                                 <div class="time-inputs">
@@ -361,6 +292,7 @@
                                     <input type="time" class="form-control time-input" id="fri-end">
                                 </div>
                             </div>
+                            
                             <div class="schedule-day">
                                 <label class="form-label" id="saturday-label">Saturday</label>
                                 <div class="time-inputs">
@@ -369,6 +301,7 @@
                                     <input type="time" class="form-control time-input" id="sat-end">
                                 </div>
                             </div>
+                            
                             <div class="schedule-day">
                                 <label class="form-label" id="sunday-label">Sunday</label>
                                 <div class="time-inputs">
