@@ -1,0 +1,16 @@
+{
+  "name": "NEXUS — Personal Command Center",
+  "short_name": "NEXUS",
+  "description": "A beautiful personal command center with tasks, focus timer, habits, and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050810",
+  "theme_color": "#b44fff",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
