@@ -427,13 +427,219 @@ main{
   to{transform:translate(var(--tx),var(--ty)) scale(1);opacity:0}
 }
 
+/* ─── Timer Controls ─── */
+.timer-controls{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.timer-controls.hidden{display:none}
+.timer-btn{
+  padding:12px 28px;
+  border:none;
+  border-radius:40px;
+  font-size:clamp(0.82rem,2vw,0.95rem);
+  font-weight:600;
+  cursor:pointer;
+  letter-spacing:0.04em;
+  font-family:inherit;
+  transition:transform 0.15s, opacity 0.15s, box-shadow 0.15s, background 0.2s;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.timer-btn:active{transform:scale(0.94)}
+.timer-btn-start{
+  background:linear-gradient(135deg,#059669,#10b981);
+  color:#fff;
+  box-shadow:0 4px 20px rgba(16,185,129,0.35);
+}
+.timer-btn-start:hover{box-shadow:0 6px 28px rgba(16,185,129,0.5)}
+.timer-btn-pause{
+  background:linear-gradient(135deg,#d97706,#f59e0b);
+  color:#fff;
+  box-shadow:0 4px 20px rgba(245,158,11,0.35);
+}
+.timer-btn-pause:hover{box-shadow:0 6px 28px rgba(245,158,11,0.5)}
+.timer-btn-reset{
+  background:rgba(255,255,255,0.09);
+  color:var(--muted);
+  border:1px solid rgba(255,255,255,0.12);
+}
+.timer-btn-reset:hover{background:rgba(255,255,255,0.13);color:var(--text)}
+
+/* ─── Mode badge ─── */
+.mode-badge{
+  font-size:clamp(0.62rem,1.5vw,0.72rem);
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--accent);
+  background:rgba(167,139,250,0.1);
+  border:1px solid rgba(167,139,250,0.2);
+  padding:4px 14px;
+  border-radius:40px;
+  cursor:pointer;
+  transition:background 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.mode-badge:hover{
+  background:rgba(167,139,250,0.18);
+  border-color:rgba(167,139,250,0.35);
+}
+.mode-badge.hidden{display:none}
+
+/* ─── Duration Inputs ─── */
+.duration-inputs{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+}
+.duration-group{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.duration-group input{
+  width:72px;
+  text-align:center;
+  padding:12px 8px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:14px;
+  color:var(--text);
+  font-size:1.1rem;
+  font-family:inherit;
+  font-variant-numeric:tabular-nums;
+  transition:border-color 0.2s, background 0.2s;
+  outline:none;
+  -webkit-appearance:none;
+  color-scheme:dark;
+}
+.duration-group input:focus{
+  border-color:rgba(167,139,250,0.6);
+  background:rgba(255,255,255,0.10);
+}
+.duration-group small{
+  font-size:0.65rem;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.duration-sep{
+  font-size:1.4rem;
+  color:var(--muted);
+  font-weight:300;
+  padding-bottom:18px;
+}
+
+/* ─── Mode Presets ─── */
+.preset-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:8px;
+}
+.preset-btn{
+  padding:10px 12px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:12px;
+  color:var(--muted);
+  font-size:0.78rem;
+  font-weight:500;
+  cursor:pointer;
+  text-align:center;
+  transition:background 0.2s, color 0.2s, border-color 0.2s;
+  font-family:inherit;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.preset-btn:hover, .preset-btn.active{
+  background:rgba(167,139,250,0.15);
+  color:var(--text);
+  border-color:rgba(167,139,250,0.35);
+}
+.preset-btn .preset-icon{
+  display:block;
+  font-size:1.2rem;
+  margin-bottom:2px;
+}
+
+/* ─── Modal Mode Tabs ─── */
+.mode-tabs{
+  display:flex;
+  gap:6px;
+  margin-bottom:20px;
+  background:rgba(255,255,255,0.05);
+  border-radius:14px;
+  padding:4px;
+}
+.mode-tab{
+  flex:1;
+  padding:10px 8px;
+  border:none;
+  border-radius:11px;
+  background:transparent;
+  color:var(--muted);
+  font-size:clamp(0.7rem,2vw,0.8rem);
+  font-weight:600;
+  cursor:pointer;
+  transition:background 0.2s, color 0.2s;
+  font-family:inherit;
+  text-align:center;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.mode-tab.active{
+  background:rgba(167,139,250,0.2);
+  color:var(--text);
+}
+.mode-tab:hover:not(.active){
+  background:rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.7);
+}
+
+.field.hidden{display:none}
+
 /* ─── Responsive tweaks ─── */
 @media(max-width:480px){
   .unit{padding:0 clamp(6px,2vw,16px)}
   .sep{gap:8px}
+  .timer-btn{padding:10px 20px;font-size:0.82rem}
+  .preset-grid{grid-template-columns:1fr 1fr}
+  .modal{
+    max-height:calc(100dvh - 40px);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .mode-tabs{flex-wrap:wrap}
+  .mode-tab{min-width:calc(33% - 6px)}
 }
 @media(max-width:360px){
   :root{--digit-size:2.6rem}
+  .timer-btn{padding:8px 16px;font-size:0.78rem}
+  .duration-group input{width:60px;padding:10px 6px;font-size:1rem}
+  .preset-grid{grid-template-columns:1fr 1fr}
+}
+
+/* Ensure buttons & interactive elements are touch-friendly on mobile */
+@media(hover:none) and (pointer:coarse){
+  .event-name,.target-info,.mode-badge{
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+  }
+  .btn,.timer-btn,.preset-btn{
+    min-height:44px;
+  }
+  .field input,.duration-group input{
+    min-height:44px;
+  }
 }
 </style>
 </head>
@@ -475,6 +681,14 @@ main{
     </div>
   </div>
 
+  <div class="timer-controls hidden" id="timerControls">
+    <button class="timer-btn timer-btn-start" id="btnStart" aria-label="Start timer">▶ Start</button>
+    <button class="timer-btn timer-btn-pause" id="btnPause" aria-label="Pause timer" style="display:none">⏸ Pause</button>
+    <button class="timer-btn timer-btn-reset" id="btnReset" aria-label="Reset timer">↺ Reset</button>
+  </div>
+
+  <span class="mode-badge hidden" id="modeBadge" role="button" tabindex="0" aria-label="Click to change mode"></span>
+
   <p class="target-info" id="targetInfo" role="button" tabindex="0" aria-label="Click to edit target date"></p>
 </main>
 
@@ -482,14 +696,61 @@ main{
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Countdown settings">
   <div class="modal" id="modal">
     <h2>Set Countdown</h2>
-    <div class="field">
+
+    <div class="mode-tabs" id="modeTabs">
+      <button class="mode-tab active" data-mode="countdown">📅 Date</button>
+      <button class="mode-tab" data-mode="timer">⏱ Timer</button>
+      <button class="mode-tab" data-mode="preset">🏆 Presets</button>
+    </div>
+
+    <div class="field" id="fieldName">
       <label for="nameInput">Event Name</label>
       <input type="text" id="nameInput" maxlength="60" placeholder="New Year 2027" autocomplete="off" spellcheck="false">
     </div>
-    <div class="field">
+
+    <div class="field" id="fieldDate">
       <label for="dateInput">Target Date &amp; Time</label>
       <input type="datetime-local" id="dateInput">
     </div>
+
+    <div class="field hidden" id="fieldDuration">
+      <label>Duration</label>
+      <div class="duration-inputs">
+        <div class="duration-group">
+          <input type="number" id="durHours" min="0" max="99" value="0" inputmode="numeric">
+          <small>Hours</small>
+        </div>
+        <span class="duration-sep">:</span>
+        <div class="duration-group">
+          <input type="number" id="durMinutes" min="0" max="59" value="0" inputmode="numeric">
+          <small>Min</small>
+        </div>
+        <span class="duration-sep">:</span>
+        <div class="duration-group">
+          <input type="number" id="durSeconds" min="0" max="59" value="0" inputmode="numeric">
+          <small>Sec</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="field hidden" id="fieldPresets">
+      <label>Choose a Preset</label>
+      <div class="preset-grid" id="presetGrid">
+        <button class="preset-btn" data-duration="1800" data-name="Exam (30 min)"><span class="preset-icon">📝</span>Exam 30m</button>
+        <button class="preset-btn" data-duration="3600" data-name="Exam (1 hour)"><span class="preset-icon">📝</span>Exam 1h</button>
+        <button class="preset-btn" data-duration="7200" data-name="Exam (2 hours)"><span class="preset-icon">📝</span>Exam 2h</button>
+        <button class="preset-btn" data-duration="10800" data-name="Exam (3 hours)"><span class="preset-icon">📝</span>Exam 3h</button>
+        <button class="preset-btn" data-duration="2700" data-name="Football – 1st Half"><span class="preset-icon">⚽</span>Football Half</button>
+        <button class="preset-btn" data-duration="5400" data-name="Football – Full Match"><span class="preset-icon">⚽</span>Football 90m</button>
+        <button class="preset-btn" data-duration="900" data-name="Football – Extra Time"><span class="preset-icon">⚽</span>Extra Time 15m</button>
+        <button class="preset-btn" data-duration="720" data-name="Basketball Quarter"><span class="preset-icon">🏀</span>Basketball 12m</button>
+        <button class="preset-btn" data-duration="1200" data-name="Hockey Period"><span class="preset-icon">🏒</span>Hockey 20m</button>
+        <button class="preset-btn" data-duration="2400" data-name="Rugby Half"><span class="preset-icon">🏉</span>Rugby 40m</button>
+        <button class="preset-btn" data-duration="300" data-name="Boxing Round"><span class="preset-icon">🥊</span>Boxing 5m</button>
+        <button class="preset-btn" data-duration="600" data-name="Quick Timer"><span class="preset-icon">⏲️</span>10 min</button>
+      </div>
+    </div>
+
     <div class="modal-actions">
       <button class="btn btn-cancel" id="btnCancel">Cancel</button>
       <button class="btn btn-save" id="btnSave">Save</button>
@@ -511,13 +772,22 @@ function save(data) {
 const DEFAULT_TARGET = new Date('2027-01-01T00:00:00').getTime();
 const DEFAULT_NAME   = 'New Year 2027';
 
-let state = { name: DEFAULT_NAME, target: DEFAULT_TARGET, ...load() };
+let state = {
+  name: DEFAULT_NAME,
+  target: DEFAULT_TARGET,
+  mode: 'countdown',       // 'countdown' | 'timer'
+  duration: 0,             // total seconds for timer mode
+  timerStatus: 'idle',     // 'idle' | 'running' | 'paused'
+  remaining: 0,            // remaining seconds when paused
+  ...load()
+};
 
 /* ── Digit Drums ── */
 const drumState = {};
 
 function getDrum(containerId, numDigits) {
   const container = document.getElementById(containerId);
+  if (!container) return null;
   if (!drumState[containerId]) {
     drumState[containerId] = { container, drums: [], prev: [] };
     for (let i = 0; i < numDigits; i++) {
@@ -533,20 +803,20 @@ function getDrum(containerId, numDigits) {
 
 function setDigits(id, value, digits) {
   const padded = String(value).padStart(digits, '0');
-  const { drums, prev } = getDrum(id, digits);
+  const st = getDrum(id, digits);
+  if (!st) return;
+  const { drums, prev } = st;
   for (let i = 0; i < digits; i++) {
     const ch = padded[i];
     if (ch === String(prev[i])) continue;
     prev[i] = ch;
     const drum = drums[i];
-    // Animate out existing
     const existing = drum.querySelector('.drum-value:not(.d-out)');
     if (existing) {
       existing.classList.remove('d-in');
       existing.classList.add('d-out');
       existing.addEventListener('animationend', () => existing.remove(), { once: true });
     }
-    // Create new
     const el = document.createElement('div');
     el.className = 'drum-value d-in';
     el.textContent = ch;
@@ -562,13 +832,55 @@ function fmt(dt) {
   });
 }
 
+function fmtDuration(sec) {
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+  const parts = [];
+  if (h > 0) parts.push(h + 'h');
+  if (m > 0 || h > 0) parts.push(m + 'm');
+  parts.push(s + 's');
+  return parts.join(' ');
+}
+
+/* ── Layout: show/hide Days unit for timer mode ── */
+function buildCountdownMarkup(showDays) {
+  const cd = document.getElementById('countdown');
+  if (showDays) {
+    cd.innerHTML = `
+      <div class="unit"><div class="digits" id="dDays"></div><div class="unit-label">Days</div></div>
+      <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+      <div class="unit"><div class="digits" id="dHours"></div><div class="unit-label">Hours</div></div>
+      <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+      <div class="unit"><div class="digits" id="dMinutes"></div><div class="unit-label">Minutes</div></div>
+      <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+      <div class="unit"><div class="digits" id="dSeconds"></div><div class="unit-label">Seconds</div></div>`;
+  } else {
+    cd.innerHTML = `
+      <div class="unit"><div class="digits" id="dHours"></div><div class="unit-label">Hours</div></div>
+      <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+      <div class="unit"><div class="digits" id="dMinutes"></div><div class="unit-label">Minutes</div></div>
+      <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+      <div class="unit"><div class="digits" id="dSeconds"></div><div class="unit-label">Seconds</div></div>`;
+  }
+  ['dDays','dHours','dMinutes','dSeconds'].forEach(id => delete drumState[id]);
+}
+
 /* ── Tick ── */
 let lastSeconds = -1;
 let doneFired = false;
 
 function tick() {
-  const now    = Date.now();
-  const diff   = state.target - now;
+  if (state.mode === 'timer') {
+    tickTimer();
+  } else {
+    tickCountdown();
+  }
+}
+
+function tickCountdown() {
+  const now  = Date.now();
+  const diff = state.target - now;
 
   if (diff <= 0) {
     if (!doneFired) {
@@ -589,6 +901,43 @@ function tick() {
 
   const dayDigits = days >= 100 ? 3 : 2;
   setDigits('dDays',    days,    dayDigits);
+  setDigits('dHours',   hours,   2);
+  setDigits('dMinutes', minutes, 2);
+  setDigits('dSeconds', seconds, 2);
+}
+
+function tickTimer() {
+  let remaining;
+
+  if (state.timerStatus === 'idle') {
+    remaining = state.duration;
+  } else if (state.timerStatus === 'paused') {
+    remaining = state.remaining;
+  } else if (state.timerStatus === 'running') {
+    const now  = Date.now();
+    const diff = state.target - now;
+    if (diff <= 0) {
+      remaining = 0;
+      if (!doneFired) {
+        doneFired = true;
+        state.timerStatus = 'idle';
+        state.remaining = 0;
+        save(state);
+        updateTimerButtons();
+        showDone();
+      }
+      return;
+    }
+    remaining = Math.floor(diff / 1000);
+  }
+
+  if (remaining === lastSeconds) return;
+  lastSeconds = remaining;
+
+  const hours   = Math.floor(remaining / 3600);
+  const minutes = Math.floor((remaining % 3600) / 60);
+  const seconds = remaining % 60;
+
   setDigits('dHours',   hours,   2);
   setDigits('dMinutes', minutes, 2);
   setDigits('dSeconds', seconds, 2);
@@ -620,12 +969,96 @@ function showDone() {
   card.appendChild(ring);
 }
 
+/* ── Timer controls ── */
+const timerControls = document.getElementById('timerControls');
+const btnStart      = document.getElementById('btnStart');
+const btnPause      = document.getElementById('btnPause');
+const btnReset      = document.getElementById('btnReset');
+
+function startTimer() {
+  let sec = (state.timerStatus === 'paused' && state.remaining > 0)
+    ? state.remaining
+    : state.duration;
+  if (sec <= 0) return;
+  state.target = Date.now() + sec * 1000;
+  state.timerStatus = 'running';
+  state.remaining = sec;
+  doneFired = false;
+  lastSeconds = -1;
+  save(state);
+  updateTimerButtons();
+  restoreCountdownIfDone();
+  tick();
+}
+
+function pauseTimer() {
+  if (state.timerStatus !== 'running') return;
+  const diff = state.target - Date.now();
+  state.remaining = Math.max(0, Math.floor(diff / 1000));
+  state.timerStatus = 'paused';
+  save(state);
+  updateTimerButtons();
+}
+
+function resetTimer() {
+  state.timerStatus = 'idle';
+  state.remaining = state.duration;
+  doneFired = false;
+  lastSeconds = -1;
+  save(state);
+  updateTimerButtons();
+  restoreCountdownIfDone();
+  tick();
+}
+
+function updateTimerButtons() {
+  if (state.mode !== 'timer') {
+    timerControls.classList.add('hidden');
+    return;
+  }
+  timerControls.classList.remove('hidden');
+  if (state.timerStatus === 'running') {
+    btnStart.style.display = 'none';
+    btnPause.style.display = '';
+  } else {
+    btnStart.style.display = '';
+    btnPause.style.display = 'none';
+    btnStart.textContent = state.timerStatus === 'paused' ? '▶ Resume' : '▶ Start';
+  }
+}
+
+btnStart.addEventListener('click', startTimer);
+btnPause.addEventListener('click', pauseTimer);
+btnReset.addEventListener('click', resetTimer);
+
+/* ── Restore countdown markup if in done state ── */
+function restoreCountdownIfDone() {
+  const cd = document.getElementById('countdown');
+  if (!cd.querySelector('.unit')) {
+    buildCountdownMarkup(state.mode === 'countdown');
+    const ring = document.querySelector('.confetti-ring');
+    if (ring) ring.remove();
+  }
+}
+
 /* ── Target info label ── */
 function updateLabel() {
-  const info = document.getElementById('targetInfo');
-  const name = document.getElementById('eventName');
+  const info    = document.getElementById('targetInfo');
+  const name    = document.getElementById('eventName');
+  const badge   = document.getElementById('modeBadge');
+
   name.textContent = state.name;
-  info.textContent = fmt(new Date(state.target));
+
+  if (state.mode === 'countdown') {
+    info.textContent = fmt(new Date(state.target));
+    info.classList.remove('hidden');
+    badge.classList.add('hidden');
+  } else {
+    info.textContent = 'Duration: ' + fmtDuration(state.duration);
+    info.classList.remove('hidden');
+    badge.classList.remove('hidden');
+    badge.textContent = '⏱ Timer Mode';
+  }
 }
 
 /* ── Card tilt / parallax ── */
@@ -653,15 +1086,76 @@ const nameInput  = document.getElementById('nameInput');
 const dateInput  = document.getElementById('dateInput');
 const btnSave    = document.getElementById('btnSave');
 const btnCancel  = document.getElementById('btnCancel');
+const modeTabs   = document.querySelectorAll('.mode-tab');
+const fieldDate  = document.getElementById('fieldDate');
+const fieldDur   = document.getElementById('fieldDuration');
+const fieldPre   = document.getElementById('fieldPresets');
+const durH       = document.getElementById('durHours');
+const durM       = document.getElementById('durMinutes');
+const durS       = document.getElementById('durSeconds');
+
+let modalMode = 'countdown';
+let selectedPresetDuration = 0;
+let selectedPresetName = '';
+
+function setModalMode(mode) {
+  modalMode = mode;
+  modeTabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  fieldDate.classList.toggle('hidden', mode !== 'countdown');
+  fieldDur.classList.toggle('hidden',  mode !== 'timer');
+  fieldPre.classList.toggle('hidden',  mode !== 'preset');
+
+  // Show/hide name field placeholder based on mode
+  if (mode === 'countdown') {
+    nameInput.placeholder = 'New Year 2027';
+  } else if (mode === 'timer') {
+    nameInput.placeholder = 'My Timer';
+  } else {
+    nameInput.placeholder = 'Event Name (auto-filled)';
+  }
+}
+
+modeTabs.forEach(tab => {
+  tab.addEventListener('click', () => setModalMode(tab.dataset.mode));
+});
+
+// Preset buttons
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedPresetDuration = parseInt(btn.dataset.duration, 10);
+    selectedPresetName = btn.dataset.name;
+    nameInput.value = selectedPresetName;
+  });
+});
 
 function openModal() {
+  if (state.mode === 'countdown') {
+    setModalMode('countdown');
+  } else {
+    setModalMode('timer');
+  }
   nameInput.value = state.name;
+
+  // Populate date
   const d = new Date(state.target);
-  // datetime-local value: YYYY-MM-DDTHH:MM
   const pad = n => String(n).padStart(2,'0');
   dateInput.value =
     `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}` +
     `T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+  // Populate duration
+  const dur = state.duration || 0;
+  durH.value = Math.floor(dur / 3600);
+  durM.value = Math.floor((dur % 3600) / 60);
+  durS.value = dur % 60;
+
+  // Reset preset selection
+  selectedPresetDuration = 0;
+  selectedPresetName = '';
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+
   overlay.classList.add('open');
   setTimeout(() => nameInput.focus(), 60);
 }
@@ -671,44 +1165,56 @@ function closeModal() {
 }
 
 function applySettings() {
-  const name   = nameInput.value.trim() || DEFAULT_NAME;
-  const dt     = new Date(dateInput.value);
-  const target = isNaN(dt.getTime()) ? DEFAULT_TARGET : dt.getTime();
-  state = { name, target };
+  const name = nameInput.value.trim() || DEFAULT_NAME;
+
+  if (modalMode === 'countdown') {
+    const dt     = new Date(dateInput.value);
+    const target = isNaN(dt.getTime()) ? DEFAULT_TARGET : dt.getTime();
+    state = { name, target, mode: 'countdown', duration: 0, timerStatus: 'idle', remaining: 0 };
+  } else if (modalMode === 'timer') {
+    const h = Math.max(0, parseInt(durH.value, 10) || 0);
+    const m = Math.max(0, Math.min(59, parseInt(durM.value, 10) || 0));
+    const s = Math.max(0, Math.min(59, parseInt(durS.value, 10) || 0));
+    const totalSec = h * 3600 + m * 60 + s;
+    state = { name, target: 0, mode: 'timer', duration: totalSec, timerStatus: 'idle', remaining: totalSec };
+  } else if (modalMode === 'preset') {
+    const dur = selectedPresetDuration || 600;
+    const pName = name !== DEFAULT_NAME ? name : (selectedPresetName || 'Timer');
+    state = { name: pName, target: 0, mode: 'timer', duration: dur, timerStatus: 'idle', remaining: dur };
+  }
+
   save(state);
   doneFired = false;
   lastSeconds = -1;
+
   // Reset drums
   Object.keys(drumState).forEach(k => {
     drumState[k].drums.forEach(d => d.innerHTML = '');
     drumState[k].prev = drumState[k].prev.map(() => -1);
   });
-  // Restore countdown markup if was in done state
+
+  // Rebuild countdown markup
   const cd = document.getElementById('countdown');
-  if (!cd.querySelector('.unit')) {
-    cd.innerHTML = `
-      <div class="unit"><div class="digits" id="dDays"></div><div class="unit-label">Days</div></div>
-      <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
-      <div class="unit"><div class="digits" id="dHours"></div><div class="unit-label">Hours</div></div>
-      <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
-      <div class="unit"><div class="digits" id="dMinutes"></div><div class="unit-label">Minutes</div></div>
-      <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
-      <div class="unit"><div class="digits" id="dSeconds"></div><div class="unit-label">Seconds</div></div>`;
-    // Re-init drum state for new elements
-    ['dDays','dHours','dMinutes','dSeconds'].forEach(id => delete drumState[id]);
+  if (!cd.querySelector('.unit') || (state.mode === 'countdown') !== !!cd.querySelector('#dDays')) {
+    buildCountdownMarkup(state.mode === 'countdown');
   }
+
   // Remove confetti
   const ring = document.querySelector('.confetti-ring');
   if (ring) ring.remove();
+
   updateLabel();
+  updateTimerButtons();
   closeModal();
   tick();
 }
 
 document.getElementById('eventName').addEventListener('click', openModal);
 document.getElementById('targetInfo').addEventListener('click', openModal);
+document.getElementById('modeBadge').addEventListener('click', openModal);
 document.getElementById('eventName').addEventListener('keydown', e => (e.key==='Enter'||e.key===' ') && openModal());
 document.getElementById('targetInfo').addEventListener('keydown', e => (e.key==='Enter'||e.key===' ') && openModal());
+document.getElementById('modeBadge').addEventListener('keydown', e => (e.key==='Enter'||e.key===' ') && openModal());
 btnSave.addEventListener('click', applySettings);
 btnCancel.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
@@ -724,7 +1230,9 @@ function escHtml(str) {
 }
 
 /* ── Init ── */
+buildCountdownMarkup(state.mode === 'countdown');
 updateLabel();
+updateTimerButtons();
 tick();
 setInterval(tick, 200);
 </script>
