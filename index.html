@@ -629,15 +629,15 @@ main{
 
 /* Ensure buttons & interactive elements are touch-friendly on mobile */
 @media(hover:none) and (pointer:coarse){
-  .event-name,.target-info,.mode-badge{
+  .event-name, .target-info, .mode-badge{
     min-height:44px;
     display:inline-flex;
     align-items:center;
   }
-  .btn,.timer-btn,.preset-btn{
+  .btn, .timer-btn, .preset-btn{
     min-height:44px;
   }
-  .field input,.duration-group input{
+  .field input, .duration-group input{
     min-height:44px;
   }
 }
@@ -803,9 +803,9 @@ function getDrum(containerId, numDigits) {
 
 function setDigits(id, value, digits) {
   const padded = String(value).padStart(digits, '0');
-  const st = getDrum(id, digits);
-  if (!st) return;
-  const { drums, prev } = st;
+  const drumData = getDrum(id, digits);
+  if (!drumData) return;
+  const { drums, prev } = drumData;
   for (let i = 0; i < digits; i++) {
     const ch = padded[i];
     if (ch === String(prev[i])) continue;
@@ -1195,8 +1195,10 @@ function applySettings() {
 
   // Rebuild countdown markup
   const cd = document.getElementById('countdown');
-  if (!cd.querySelector('.unit') || (state.mode === 'countdown') !== !!cd.querySelector('#dDays')) {
-    buildCountdownMarkup(state.mode === 'countdown');
+  const needsDaysUnit = state.mode === 'countdown';
+  const hasDaysUnit = cd.querySelector('#dDays') !== null;
+  if (!cd.querySelector('.unit') || needsDaysUnit !== hasDaysUnit) {
+    buildCountdownMarkup(needsDaysUnit);
   }
 
   // Remove confetti
