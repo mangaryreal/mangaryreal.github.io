@@ -799,7 +799,7 @@ main{
         <button class="preset-btn" data-preset="exam_120" data-duration="7200" data-name="Exam (2 hours)"><span class="preset-icon">📝</span>Exam 2h</button>
         <button class="preset-btn" data-preset="exam_180" data-duration="10800" data-name="Exam (3 hours)"><span class="preset-icon">📝</span>Exam 3h</button>
         <button class="preset-btn" data-preset="football_half" data-duration="2700" data-name="Football – 1st Half"><span class="preset-icon">⚽</span>Football Half</button>
-        <button class="preset-btn" data-preset="football_full" data-duration="2700" data-name="Football – Full Match"><span class="preset-icon">⚽</span>Football 90m</button>
+        <button class="preset-btn" data-preset="football_full" data-duration="5400" data-name="Football – Full Match"><span class="preset-icon">⚽</span>Football 90m</button>
         <button class="preset-btn" data-preset="football_extra" data-duration="900" data-name="Football – Extra Time"><span class="preset-icon">⚽</span>Extra Time 15m</button>
         <button class="preset-btn" data-preset="basketball" data-duration="720" data-name="Basketball"><span class="preset-icon">🏀</span>Basketball 12m</button>
         <button class="preset-btn" data-preset="hockey" data-duration="1200" data-name="Hockey"><span class="preset-icon">🏒</span>Hockey 20m</button>
@@ -1094,7 +1094,7 @@ function showDone() {
   const glassCard = document.getElementById('glassCard');
   const cd   = document.getElementById('countdown');
   cd.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:0 16px">' +
-    '<div class="done-msg">🎉&nbsp; Time\u2019s up!</div>' +
+    '<div class="done-msg">🎉&nbsp; Time&rsquo;s up!</div>' +
     '<div class="done-sub">' + escHtml(state.name) + '</div></div>';
   burstConfetti(glassCard);
 }
@@ -1266,7 +1266,7 @@ function updateLabel() {
   } else {
     const preset = getActivePreset();
     if (preset && preset.periods.length > 1) {
-      const totalDur = preset.periods.reduce(function(sum, p) { return sum + p.dur; }, 0);
+      const totalDur = preset.periods.reduce((sum, p) => sum + p.dur, 0);
       info.textContent = 'Total: ' + fmtDuration(totalDur) + ' · Period: ' + fmtDuration(state.duration);
     } else {
       info.textContent = 'Duration: ' + fmtDuration(state.duration);
